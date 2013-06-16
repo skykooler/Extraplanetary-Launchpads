@@ -204,7 +204,6 @@ public class ExLaunchPad : PartModule
                     {
                         GUILayout.FlexibleSpace();
                         // limit slider to 0.5% increments
-                        //float tmp = (float)Math.Round(GUILayout.HorizontalSlider(uis.resourcesliders[pair.Key], 0.0F, 1.0F, GUILayout.Width(300), GUILayout.Height(20)), 3);
                         float tmp = (float)Math.Round(GUILayout.HorizontalSlider(uis.resourcesliders[pair.Key], 0.0F, 1.0F, sliSty, new GUIStyle(GUI.skin.horizontalSliderThumb), GUILayout.Width(300), GUILayout.Height(20)), 3);
                         tmp = (Mathf.Floor(tmp * 200)) / 200;
 
@@ -351,10 +350,7 @@ public class ExLaunchPad : PartModule
             HideBuildMenu();
         }
 
-        if (GUILayout.Toggle(uis.showbuilduionload, "Show on StartUp") != uis.showbuilduionload)
-        {
-            uis.showbuilduionload = !uis.showbuilduionload;
-        }
+        uis.showbuilduionload = GUILayout.Toggle(uis.showbuilduionload, "Show on StartUp");
 
 
         GUILayout.FlexibleSpace();
