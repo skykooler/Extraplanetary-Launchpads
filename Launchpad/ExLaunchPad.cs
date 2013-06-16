@@ -19,21 +19,21 @@ public class ExLaunchPad : PartModule
     {
         public Rect windowpos;
         public bool builduiactive = false;
-        static public bool showbuilduionload = false;
-        static public bool init = true;
-        static public bool linklfosliders = true;
-        static public bool showvab = true;
-        static public bool showsph = false;
-        static public bool canbuildcraft = false;
-        static public crafttype ct = crafttype.VAB;
-        static public string craftfile = null;
-        static public CraftBrowser craftlist = null;
-        static public bool showcraftbrowser = false;
-        static public ConfigNode craftnode = null;
-        static public bool craftselected = false;
-        static public Vector2 resscroll;
-        static public Dictionary<string, float> requiredresources = null;
-        static public Dictionary<string, float> resourcesliders = new Dictionary<string, float>();
+        public bool showbuilduionload = false;
+        public bool init = true;
+        public bool linklfosliders = true;
+        public bool showvab = true;
+        public bool showsph = false;
+        public bool canbuildcraft = false;
+        public crafttype ct = crafttype.VAB;
+        public string craftfile = null;
+        public CraftBrowser craftlist = null;
+        public bool showcraftbrowser = false;
+        public ConfigNode craftnode = null;
+        public bool craftselected = false;
+        public Vector2 resscroll;
+        public Dictionary<string, float> requiredresources = null;
+        public Dictionary<string, float> resourcesliders = new Dictionary<string, float>();
     }
 
     private UIStatus uis = new UIStatus();
@@ -55,9 +55,9 @@ public class ExLaunchPad : PartModule
          * 
          * Style declarations messy - how do I dupe them easily?
          */
-        if (UIStatus.init)
+        if (uis.init)
         {
-            UIStatus.init = false;
+            uis.init = false;
         }
 
         EditorLogic editor = EditorLogic.fetch;
@@ -94,17 +94,17 @@ public class ExLaunchPad : PartModule
         GUILayout.BeginHorizontal("box");
         GUILayout.FlexibleSpace();
         // VAB / SPH selection
-        if (GUILayout.Toggle(UIStatus.showvab, "VAB", GUILayout.Width(80)))
+        if (GUILayout.Toggle(uis.showvab, "VAB", GUILayout.Width(80)))
         {
-            UIStatus.showvab = true;
-            UIStatus.showsph = false;
-            UIStatus.ct = crafttype.VAB;
+            uis.showvab = true;
+            uis.showsph = false;
+            uis.ct = crafttype.VAB;
         }
-        if (GUILayout.Toggle(UIStatus.showsph, "SPH"))
+        if (GUILayout.Toggle(uis.showsph, "SPH"))
         {
-            UIStatus.showvab = false;
-            UIStatus.showsph = true;
-            UIStatus.ct = crafttype.SPH;
+            uis.showvab = false;
+            uis.showsph = true;
+            uis.ct = crafttype.SPH;
         }
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
@@ -113,22 +113,22 @@ public class ExLaunchPad : PartModule
 
         if (GUILayout.Button("Select Craft", mySty, GUILayout.ExpandWidth(true)))//GUILayout.Button is "true" when clicked
         {
-            UIStatus.craftlist = new CraftBrowser(new Rect(Screen.width / 2, 100, 350, 500), UIStatus.ct.ToString(), strpath, "Select a ship to load", craftSelectComplete, craftSelectCancel, HighLogic.Skin, EditorLogic.ShipFileImage, true);
-            UIStatus.showcraftbrowser = true;
+            uis.craftlist = new CraftBrowser(new Rect(Screen.width / 2, 100, 350, 500), uis.ct.ToString(), strpath, "Select a ship to load", craftSelectComplete, craftSelectCancel, HighLogic.Skin, EditorLogic.ShipFileImage, true);
+            uis.showcraftbrowser = true;
         }
 
-        if (UIStatus.craftselected)
+        if (uis.craftselected)
         {
-            GUILayout.Box("Selected Craft:  " + UIStatus.craftnode.GetValue("ship"), whiSty);
+            GUILayout.Box("Selected Craft:  " + uis.craftnode.GetValue("ship"), whiSty);
 
             // Resource requirements
             GUILayout.Label("Resources required to build:", labSty, GUILayout.Width(600));
 
             // Link LFO toggle
 
-            UIStatus.linklfosliders = GUILayout.Toggle(UIStatus.linklfosliders, "Link RocketFuel sliders for LiquidFuel and Oxidizer");
+            uis.linklfosliders = GUILayout.Toggle(uis.linklfosliders, "Link RocketFuel sliders for LiquidFuel and Oxidizer");
 
-            UIStatus.resscroll = GUILayout.BeginScrollView(UIStatus.resscroll, GUILayout.Width(600), GUILayout.Height(300));
+            uis.resscroll = GUILayout.BeginScrollView(uis.resscroll, GUILayout.Width(600), GUILayout.Height(300));
 
             GUILayout.BeginHorizontal();
 			
@@ -139,12 +139,12 @@ public class ExLaunchPad : PartModule
             GUILayout.Label("Available", labSty, GUILayout.Width(60));
             GUILayout.EndHorizontal();
 
-            UIStatus.canbuildcraft = true;      // default to can build - if something is stopping us from building, we will set to false later
+            uis.canbuildcraft = true;      // default to can build - if something is stopping us from building, we will set to false later
 
             // LFO = 55% oxidizer
 
             // Cycle through required resources
-            foreach (KeyValuePair<string, float> pair in UIStatus.requiredresources)
+            foreach (KeyValuePair<string, float> pair in uis.requiredresources)
             {
                 string resname = pair.Key;  // Holds REAL resource name. May neet to translate from "JetFuel" back to "LiquidFuel"
                 string reslabel = resname;   // Resource name for DISPLAY purposes only. Internally the app uses pair.Key
@@ -177,8 +177,8 @@ public class ExLaunchPad : PartModule
                 GUILayout.Box(reslabel, whiSty, GUILayout.Width(120), GUILayout.Height(40));
                 
                 // Add resource to Dictionary if it does not exist
-				if (!UIStatus.resourcesliders.ContainsKey(pair.Key)) {
-                   UIStatus.resourcesliders.Add(pair.Key, 1);
+				if (!uis.resourcesliders.ContainsKey(pair.Key)) {
+                   uis.resourcesliders.Add(pair.Key, 1);
                 }
 
                 GUIStyle tmpSty = new GUIStyle(GUI.skin.label);
@@ -194,7 +194,7 @@ public class ExLaunchPad : PartModule
                     if (pair.Key == "RocketParts")
                     {
                         // Partial Fill for RocketParts not allowed - Instead of creating a slider, hard-wire slider position to 100%
-                        UIStatus.resourcesliders[pair.Key] = 1;
+                        uis.resourcesliders[pair.Key] = 1;
                         GUILayout.FlexibleSpace();
                         GUILayout.Box("Must be 100%", GUILayout.Width(300), GUILayout.Height(20));
                         GUILayout.FlexibleSpace();
@@ -204,25 +204,25 @@ public class ExLaunchPad : PartModule
                     {
                         GUILayout.FlexibleSpace();
                         // limit slider to 0.5% increments
-                        //float tmp = (float)Math.Round(GUILayout.HorizontalSlider(UIStatus.resourcesliders[pair.Key], 0.0F, 1.0F, GUILayout.Width(300), GUILayout.Height(20)), 3);
-                        float tmp = (float)Math.Round(GUILayout.HorizontalSlider(UIStatus.resourcesliders[pair.Key], 0.0F, 1.0F, sliSty, new GUIStyle(GUI.skin.horizontalSliderThumb), GUILayout.Width(300), GUILayout.Height(20)), 3);
+                        //float tmp = (float)Math.Round(GUILayout.HorizontalSlider(uis.resourcesliders[pair.Key], 0.0F, 1.0F, GUILayout.Width(300), GUILayout.Height(20)), 3);
+                        float tmp = (float)Math.Round(GUILayout.HorizontalSlider(uis.resourcesliders[pair.Key], 0.0F, 1.0F, sliSty, new GUIStyle(GUI.skin.horizontalSliderThumb), GUILayout.Width(300), GUILayout.Height(20)), 3);
                         tmp = (Mathf.Floor(tmp * 200)) / 200;
 
                         // Are we in link LFO mode?
-                        if (UIStatus.linklfosliders)
+                        if (uis.linklfosliders)
                         {
 
                             if (pair.Key == "Oxidizer")
                             {
-                                UIStatus.resourcesliders["LiquidFuel"] = tmp;
+                                uis.resourcesliders["LiquidFuel"] = tmp;
                             }
                             else if (pair.Key == "LiquidFuel")
                             {
-                                UIStatus.resourcesliders["Oxidizer"] = tmp;
+                                uis.resourcesliders["Oxidizer"] = tmp;
                             }
                         }
                         // Assign slider value to variable
-                        UIStatus.resourcesliders[pair.Key] = tmp;
+                        uis.resourcesliders[pair.Key] = tmp;
                         GUILayout.Box((tmp * 100).ToString() + "%", tmpSty, GUILayout.Width(300), GUILayout.Height(20));
                         GUILayout.FlexibleSpace();
                     }
@@ -241,13 +241,13 @@ public class ExLaunchPad : PartModule
 
                 if (pair.Key == "JetFuel")
                 {
-                    tot -= UIStatus.requiredresources["LiquidFuel"] * UIStatus.resourcesliders["LiquidFuel"];
+                    tot -= uis.requiredresources["LiquidFuel"] * uis.resourcesliders["LiquidFuel"];
                 }
 				GUIStyle avail = new GUIStyle();
-                if (tot < pair.Value*UIStatus.resourcesliders[pair.Key])
+                if (tot < pair.Value*uis.resourcesliders[pair.Key])
                 {
                     avail = redSty;
-                    UIStatus.canbuildcraft = false; // prevent building
+                    uis.canbuildcraft = false; // prevent building
                 }
                 else
                 {
@@ -255,7 +255,7 @@ public class ExLaunchPad : PartModule
                 }
 
                 // Required
-                GUILayout.Box((Math.Round(pair.Value * UIStatus.resourcesliders[pair.Key],2)).ToString(), avail, GUILayout.Width(60), GUILayout.Height(40));
+                GUILayout.Box((Math.Round(pair.Value * uis.resourcesliders[pair.Key],2)).ToString(), avail, GUILayout.Width(60), GUILayout.Height(40));
                 // Available
                 GUILayout.Box(((int)tot).ToString(), whiSty, GUILayout.Width(60), GUILayout.Height(40));
 
@@ -268,14 +268,14 @@ public class ExLaunchPad : PartModule
             GUILayout.EndScrollView();
 
             // Build button
-            if (UIStatus.canbuildcraft)
+            if (uis.canbuildcraft)
             {
                 if(GUILayout.Button("Build", mySty, GUILayout.ExpandWidth(true)))
                 {
 
                     // build craft
                     FlightState state = new FlightState();
-                    ShipConstruct nship = ShipConstruction.LoadShip(UIStatus.craftfile);
+                    ShipConstruct nship = ShipConstruction.LoadShip(uis.craftfile);
                     ShipConstruction.PutShipToGround(nship, this.part.transform);
                     // is this line causing bug #11 ?
                     ShipConstruction.AssembleForLaunch(nship, "External Launchpad", HighLogic.CurrentGame.flagURL, state);
@@ -285,7 +285,7 @@ public class ExLaunchPad : PartModule
                     Staging.RecalculateVesselStaging(nship.parts[0].vessel);
 					
                     // use resources
-                    foreach (KeyValuePair<string, float> pair in UIStatus.requiredresources)
+                    foreach (KeyValuePair<string, float> pair in uis.requiredresources)
                     {
                         // If resource is "JetFuel", rename to "LiquidFuel"
                         string res = pair.Key;
@@ -295,7 +295,7 @@ public class ExLaunchPad : PartModule
                         }
 
                         // Calculate resource cost based on slider position - note use pair.Key NOT res! we need to use the position of the dedicated LF slider not the LF component of LFO slider
-                        double tot = pair.Value * UIStatus.resourcesliders[pair.Key];
+                        double tot = pair.Value * uis.resourcesliders[pair.Key];
                         // Remove the resource from the vessel doing the building
                         this.part.RequestResource(res, tot);
 
@@ -315,7 +315,7 @@ public class ExLaunchPad : PartModule
                         }
                         /*
 						foreach (Part p in nship.parts) {
-							if (tot>pair.Value*UIStatus.resourcesliders[res]) {
+							if (tot>pair.Value*uis.resourcesliders[res]) {
 								tot -= p.RequestResource(res, tot-pair.Value);
 							} else {
 								break;
@@ -325,9 +325,9 @@ public class ExLaunchPad : PartModule
                     }
 
                     // Reset the UI
-                    UIStatus.craftselected = false;
-                    UIStatus.requiredresources = null;
-                    UIStatus.resourcesliders = null;
+                    uis.craftselected = false;
+                    uis.requiredresources = null;
+                    uis.resourcesliders = null;
 
                     // Close the UI
                     HideBuildMenu();
@@ -351,11 +351,9 @@ public class ExLaunchPad : PartModule
             HideBuildMenu();
         }
 
-        //UIStatus.showbuilduionload = GUILayout.Toggle(UIStatus.showbuilduionload, "Show on StartUp");
-
-        if (GUILayout.Toggle(UIStatus.showbuilduionload, "Show on StartUp") != UIStatus.showbuilduionload)
+        if (GUILayout.Toggle(uis.showbuilduionload, "Show on StartUp") != uis.showbuilduionload)
         {
-            UIStatus.showbuilduionload = !UIStatus.showbuilduionload;
+            uis.showbuilduionload = !uis.showbuilduionload;
         }
 
 
@@ -372,23 +370,23 @@ public class ExLaunchPad : PartModule
     // called when the user selects a craft the craft browser
     private void craftSelectComplete(string filename, string flagname)
     {
-        UIStatus.showcraftbrowser = false;
-        UIStatus.craftfile = filename;
-        UIStatus.craftnode = ConfigNode.Load(filename);
-        ConfigNode[] nodes = UIStatus.craftnode.GetNodes("PART");
+        uis.showcraftbrowser = false;
+        uis.craftfile = filename;
+        uis.craftnode = ConfigNode.Load(filename);
+        ConfigNode[] nodes = uis.craftnode.GetNodes("PART");
 
         // Get list of resources required to build vessel
-        UIStatus.requiredresources = getBuildCost(nodes);
-        UIStatus.craftselected = true;
+        uis.requiredresources = getBuildCost(nodes);
+        uis.craftselected = true;
     }
 
     // called when the user clicks cancel in the craft browser
     private void craftSelectCancel()
     {
-        UIStatus.showcraftbrowser = false;
+        uis.showcraftbrowser = false;
 
-        UIStatus.requiredresources = null;
-        UIStatus.craftselected = false;
+        uis.requiredresources = null;
+        uis.craftselected = false;
     }
 
     // =====================================================================================================================================================
@@ -404,17 +402,15 @@ public class ExLaunchPad : PartModule
     public override void OnAwake()
     {
         base.OnAwake();
-        // ToDo: used twice - needed?
-        if (UIStatus.showbuilduionload)
+        // ToDo: why do I need to load the config file here?
+        // Doing it in OnLoad instead breaks the "Show on Startup" function
+        LoadConfigFile();
+
+        if (uis.showbuilduionload)
         {
             ShowBuildMenu();
         }
-        else
-        {
-            // make sure uis.builduiactive is set correctly - may have restarted
-            // ToDo: To do with static vars?
-            //HideBuildMenu();
-        }
+
     }
 
     // Fired each Tick?
@@ -427,9 +423,9 @@ public class ExLaunchPad : PartModule
     // When is this fired?
     private void OnGUI()
     {
-        if (UIStatus.showcraftbrowser)
+        if (uis.showcraftbrowser)
         {
-            UIStatus.craftlist.OnGUI();
+            uis.craftlist.OnGUI();
         }
     }
 
@@ -449,17 +445,22 @@ public class ExLaunchPad : PartModule
     {
         PluginConfiguration config = PluginConfiguration.CreateForType<ExLaunchPad>();
         config.SetValue("Window Position", uis.windowpos);
-        config.SetValue("Show Build Menu on StartUp", UIStatus.showbuilduionload);
+        config.SetValue("Show Build Menu on StartUp", uis.showbuilduionload);
         config.save();
     }
 
-    // Fired before GUI active, do not try to show the GUI here!
+    
     public override void OnLoad(ConfigNode node)
+    {
+        //LoadConfigFile();
+    }
+
+    private void LoadConfigFile()
     {
         PluginConfiguration config = PluginConfiguration.CreateForType<ExLaunchPad>();
         config.load();
         uis.windowpos = config.GetValue<Rect>("Window Position");
-        UIStatus.showbuilduionload = config.GetValue<bool>("Show Build Menu on StartUp");
+        uis.showbuilduionload = config.GetValue<bool>("Show Build Menu on StartUp");
     }
 
     // =====================================================================================================================================================
@@ -515,18 +516,6 @@ public class ExLaunchPad : PartModule
         return resources;
     }
 
-    /*
-     * A simple test to see if other DLLs can call funcs
-     * to use - add reference to this dll in other project and then use this code:
-     * 
-     ExLaunchPad exl = new ExLaunchPad();
-            string tmp = exl.evilCTest();
-    */
-    public string evilCTest()
-    {
-        return "Hello!";
-    }
-
     public Dictionary<string, float> getBuildCost(ConfigNode[] nodes)
     {
         Part p;
@@ -580,6 +569,18 @@ public class ExLaunchPad : PartModule
 
     // =====================================================================================================================================================
     // Unused
+
+    /*
+     * A simple test to see if other DLLs can call funcs
+     * to use - add reference to this dll in other project and then use this code:
+     * 
+     ExLaunchPad exl = new ExLaunchPad();
+            string tmp = exl.evilCTest();
+    */
+    public string evilCTest()
+    {
+        return "Hello!";
+    }
 
     private void destroyShip(ShipConstruct nship, float availableRocketParts, float availableLiquidFuel, float availableOxidizer, float availableMonoPropellant)
     {
@@ -693,5 +694,3 @@ public class Smelter: PartModule
 	}
 }*/
 
-// =====================================================================================================================================================
-// Unused
