@@ -17,7 +17,7 @@ public class ExLaunchPad : PartModule
 
     public class UIStatus
     {
-        static public Rect windowpos;
+        public Rect windowpos;
         public bool builduiactive = false;
         static public bool showbuilduionload = false;
         static public bool init = true;
@@ -397,7 +397,7 @@ public class ExLaunchPad : PartModule
     private void drawGUI()
     {
         GUI.skin = HighLogic.Skin;
-        UIStatus.windowpos = GUILayout.Window(1, UIStatus.windowpos, WindowGUI, "Extraplanetary Launchpads", GUILayout.Width(600));
+        uis.windowpos = GUILayout.Window(1, uis.windowpos, WindowGUI, "Extraplanetary Launchpads", GUILayout.Width(600));
     }
 
     // Fired when part with module awakes?
@@ -448,7 +448,7 @@ public class ExLaunchPad : PartModule
     public override void OnSave(ConfigNode node)
     {
         PluginConfiguration config = PluginConfiguration.CreateForType<ExLaunchPad>();
-        config.SetValue("Window Position", UIStatus.windowpos);
+        config.SetValue("Window Position", uis.windowpos);
         config.SetValue("Show Build Menu on StartUp", UIStatus.showbuilduionload);
         config.save();
     }
@@ -458,7 +458,7 @@ public class ExLaunchPad : PartModule
     {
         PluginConfiguration config = PluginConfiguration.CreateForType<ExLaunchPad>();
         config.load();
-        UIStatus.windowpos = config.GetValue<Rect>("Window Position");
+        uis.windowpos = config.GetValue<Rect>("Window Position");
         UIStatus.showbuilduionload = config.GetValue<bool>("Show Build Menu on StartUp");
     }
 
