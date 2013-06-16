@@ -36,7 +36,7 @@ public class ExLaunchPad : PartModule
         static public Dictionary<string, float> resourcesliders = new Dictionary<string, float>();
     }
 
-	private List<Vessel> bases;
+	//private List<Vessel> bases;
 
     // =====================================================================================================================================================
     // UI Functions
@@ -398,6 +398,7 @@ public class ExLaunchPad : PartModule
         UIStatus.windowpos = GUILayout.Window(1, UIStatus.windowpos, WindowGUI, "Extraplanetary Launchpads", GUILayout.Width(600));
     }
 
+    // Fired when part with module awakes?
     public override void OnAwake()
     {
         base.OnAwake();
@@ -406,14 +407,22 @@ public class ExLaunchPad : PartModule
         {
             ShowBuildMenu();
         }
+        else
+        {
+            // make sure UIStatus.builduiactive is set correctly - may have restarted
+            // ToDo: To do with static vars?
+            HideBuildMenu();
+        }
     }
 
+    // Fired each Tick?
     public override void OnUpdate()
     {
         Events["ShowBuildMenu"].active = !UIStatus.builduiactive;
         Events["HideBuildMenu"].active = UIStatus.builduiactive;
     }
 
+    // When is this fired?
     private void OnGUI()
     {
         if (UIStatus.showcraftbrowser)
@@ -422,6 +431,7 @@ public class ExLaunchPad : PartModule
         }
     }
 
+    /*
     // ToDo: What Does this Do?
     private void OnLoad()
     {
@@ -431,6 +441,7 @@ public class ExLaunchPad : PartModule
             print(v.name);
         }
     }
+    */
 
     public override void OnSave(ConfigNode node)
     {
@@ -440,16 +451,13 @@ public class ExLaunchPad : PartModule
         config.save();
     }
 
+    // Fired before GUI active, do not try to show the GUI here!
     public override void OnLoad(ConfigNode node)
     {
         PluginConfiguration config = PluginConfiguration.CreateForType<ExLaunchPad>();
         config.load();
         UIStatus.windowpos = config.GetValue<Rect>("Window Position");
         UIStatus.showbuilduionload = config.GetValue<bool>("Show Build Menu on StartUp");
-        if (UIStatus.showbuilduionload)
-        {
-            ShowBuildMenu();
-        }
     }
 
     // =====================================================================================================================================================
