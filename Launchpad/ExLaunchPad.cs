@@ -15,10 +15,10 @@ public class ExLaunchPad : PartModule
 {
     public enum crafttype { SPH, VAB };
 
-    private class UIStatus
+    public class UIStatus
     {
         static public Rect windowpos;
-        static public bool builduiactive = false;
+        public bool builduiactive = false;
         static public bool showbuilduionload = false;
         static public bool init = true;
         static public bool linklfosliders = true;
@@ -35,6 +35,8 @@ public class ExLaunchPad : PartModule
         static public Dictionary<string, float> requiredresources = null;
         static public Dictionary<string, float> resourcesliders = new Dictionary<string, float>();
     }
+
+    private UIStatus uis = new UIStatus();
 
 	//private List<Vessel> bases;
 
@@ -409,17 +411,17 @@ public class ExLaunchPad : PartModule
         }
         else
         {
-            // make sure UIStatus.builduiactive is set correctly - may have restarted
+            // make sure uis.builduiactive is set correctly - may have restarted
             // ToDo: To do with static vars?
-            HideBuildMenu();
+            //HideBuildMenu();
         }
     }
 
     // Fired each Tick?
     public override void OnUpdate()
     {
-        Events["ShowBuildMenu"].active = !UIStatus.builduiactive;
-        Events["HideBuildMenu"].active = UIStatus.builduiactive;
+        Events["ShowBuildMenu"].active = !uis.builduiactive;
+        Events["HideBuildMenu"].active = uis.builduiactive;
     }
 
     // When is this fired?
@@ -467,14 +469,14 @@ public class ExLaunchPad : PartModule
     public void ShowBuildMenu()
     {
         RenderingManager.AddToPostDrawQueue(3, new Callback(drawGUI));//start the GUI
-        UIStatus.builduiactive = true;
+        uis.builduiactive = true;
     }
 
     [KSPEvent(guiActive = true, guiName = "Hide Build Menu", active = false)]
     public void HideBuildMenu()
     {
         RenderingManager.RemoveFromPostDrawQueue(3, new Callback(drawGUI)); //close the GUI
-        UIStatus.builduiactive = false;
+        uis.builduiactive = false;
     }
 
     [KSPAction("Show Build Menu")]
@@ -492,7 +494,7 @@ public class ExLaunchPad : PartModule
     [KSPAction("Toggle Build Menu")]
     public void ToggleBuildMenuAction(KSPActionParam param)
     {
-        if (UIStatus.builduiactive)
+        if (uis.builduiactive)
         {
             HideBuildMenu();
         }
