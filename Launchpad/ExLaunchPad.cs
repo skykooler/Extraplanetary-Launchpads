@@ -18,6 +18,8 @@ public class ExLaunchPad : PartModule
     private class UIStatus
     {
         static public Rect windowpos;
+        static public bool builduiactive = false;
+        static public bool showbuilduionload = false;
         static public bool init = true;
         static public bool linklfosliders = true;
         static public bool showvab = true;
@@ -34,26 +36,10 @@ public class ExLaunchPad : PartModule
         static public Dictionary<string, float> resourcesliders = new Dictionary<string, float>();
     }
 
-	[KSPField]
-	public bool aero = false;
-	[KSPField]
-	public bool rocket = true;
-	[KSPField]
-	public bool debug = false;
-
-	//private CraftBrowser craftBrowser;
-	//private bool showCraftBrowser = false;
-	
 	private List<Vessel> bases;
-	
-	private void destroyShip(ShipConstruct nship, float availableRocketParts, float availableLiquidFuel, float availableOxidizer, float availableMonoPropellant)
-	{
-		this.part.RequestResource("RocketParts", -availableRocketParts);
-		this.part.RequestResource("LiquidFuel", -availableLiquidFuel);
-		this.part.RequestResource("Oxidizer", -availableOxidizer);
-		this.part.RequestResource("MonoPropellant", -availableMonoPropellant);
-		nship.parts[0].localRoot.explode();
-	}
+
+    // =====================================================================================================================================================
+    // UI Functions
 
     private void WindowGUI(int windowID)
     {
@@ -342,7 +328,7 @@ public class ExLaunchPad : PartModule
                     UIStatus.resourcesliders = null;
 
                     // Close the UI
-                    RenderingManager.RemoveFromPostDrawQueue(3, new Callback(drawGUI)); //close the GUI
+                    HideBuildMenu();
                 }
             }
             else
@@ -356,6 +342,23 @@ public class ExLaunchPad : PartModule
         }
         GUILayout.EndVertical();
 
+        GUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        if (GUILayout.Button("Close"))
+        {
+            HideBuildMenu();
+        }
+
+        //UIStatus.showbuilduionload = GUILayout.Toggle(UIStatus.showbuilduionload, "Show on StartUp");
+
+        if (GUILayout.Toggle(UIStatus.showbuilduionload, "Show on StartUp") != UIStatus.showbuilduionload)
+        {
+            UIStatus.showbuilduionload = !UIStatus.showbuilduionload;
+        }
+
+
+        GUILayout.FlexibleSpace();
+        GUILayout.EndHorizontal();
         //DragWindow makes the window draggable. The Rect specifies which part of the window it can by dragged by, and is 
         //clipped to the actual boundary of the window. You can also pass no argument at all and then the window can by
         //dragged by any part of it. Make sure the DragWindow command is AFTER all your other GUI input stuff, or else
@@ -386,6 +389,8 @@ public class ExLaunchPad : PartModule
         UIStatus.craftselected = false;
     }
 
+    // =====================================================================================================================================================
+    // Event Hooks
 
     private void drawGUI()
     {
@@ -396,8 +401,101 @@ public class ExLaunchPad : PartModule
     public override void OnAwake()
     {
         base.OnAwake();
-        RenderingManager.AddToPostDrawQueue(3, new Callback(drawGUI));//start the GUI
+        // ToDo: used twice - needed?
+        if (UIStatus.showbuilduionload)
+        {
+            ShowBuildMenu();
+        }
     }
+
+    public override void OnUpdate()
+    {
+        Events["ShowBuildMenu"].active = !UIStatus.builduiactive;
+        Events["HideBuildMenu"].active = UIStatus.builduiactive;
+    }
+
+    private void OnGUI()
+    {
+        if (UIStatus.showcraftbrowser)
+        {
+            UIStatus.craftlist.OnGUI();
+        }
+    }
+
+    // ToDo: What Does this Do?
+    private void OnLoad()
+    {
+        bases = FlightGlobals.fetch.vessels;
+        foreach (Vessel v in bases)
+        {
+            print(v.name);
+        }
+    }
+
+    public override void OnSave(ConfigNode node)
+    {
+        PluginConfiguration config = PluginConfiguration.CreateForType<ExLaunchPad>();
+        config.SetValue("Window Position", UIStatus.windowpos);
+        config.SetValue("Show Build Menu on StartUp", UIStatus.showbuilduionload);
+        config.save();
+    }
+
+    public override void OnLoad(ConfigNode node)
+    {
+        PluginConfiguration config = PluginConfiguration.CreateForType<ExLaunchPad>();
+        config.load();
+        UIStatus.windowpos = config.GetValue<Rect>("Window Position");
+        UIStatus.showbuilduionload = config.GetValue<bool>("Show Build Menu on StartUp");
+        if (UIStatus.showbuilduionload)
+        {
+            ShowBuildMenu();
+        }
+    }
+
+    // =====================================================================================================================================================
+    // Flight UI and Action Group Hooks
+
+    [KSPEvent(guiActive = true, guiName = "Show Build Menu", active = true)]
+    public void ShowBuildMenu()
+    {
+        RenderingManager.AddToPostDrawQueue(3, new Callback(drawGUI));//start the GUI
+        UIStatus.builduiactive = true;
+    }
+
+    [KSPEvent(guiActive = true, guiName = "Hide Build Menu", active = false)]
+    public void HideBuildMenu()
+    {
+        RenderingManager.RemoveFromPostDrawQueue(3, new Callback(drawGUI)); //close the GUI
+        UIStatus.builduiactive = false;
+    }
+
+    [KSPAction("Show Build Menu")]
+    public void ShowBuildMenuAction(KSPActionParam param)
+    {
+        ShowBuildMenu();
+    }
+
+    [KSPAction("Hide Build Menu")]
+    public void HideBuildMenuAction(KSPActionParam param)
+    {
+        HideBuildMenu();
+    }
+
+    [KSPAction("Toggle Build Menu")]
+    public void ToggleBuildMenuAction(KSPActionParam param)
+    {
+        if (UIStatus.builduiactive)
+        {
+            HideBuildMenu();
+        }
+        else
+        {
+            ShowBuildMenu();
+        }
+    }
+
+    // =====================================================================================================================================================
+    // Build Helper Functions
 
     // Gets connected resources to a part. Note fuel lines are NOT reversible! Add flow going TO the constructing part!
     private static List<PartResource> GetConnectedResources(Part part, String resourceName)
@@ -470,137 +568,31 @@ public class ExLaunchPad : PartModule
         return resources;
     }
 
-    /*
-	// TODO: what is this second string?
-    // ANSWER: b is the filename of the image of the selected flag (As in a flag on a pole, not a programming flag)
-	private void getAndLoadShip(string filename, string b) 
-	{
-		ConfigNode cf = ConfigNode.Load(filename);
-		ConfigNode[] nodes = cf.GetNodes("PART");
-		
-		print ("106");
-		// Get list of resources required to build vessel
-        Dictionary<string, float> resources = getBuildCost(nodes);
+    // =====================================================================================================================================================
+    // Unused
 
-		print ("126");
-        // Check if resources available by removing and readding them
-		bool success = true;
-		List<string> keys = new List<string> (resources.Keys);
-		foreach (string k in keys) {
-			print ("129");
-			print (k);
-			float avail = this.part.RequestResource(k, resources[k]);
-			if (avail!=resources[k]) {
-				success = false;
-				print ("Not enough "+k);
-			}
-			resources[k] = avail;
-		}
-		print ("138");
-		if (debug) success = true;
-		if (success==false) {
-			print ("no success");
-			foreach (KeyValuePair<string,float> k in resources) {
-				this.part.RequestResource(k.Key, -k.Value);
-			}
-			return;
-		}
-		print ("146");
-		FlightState state = new FlightState();
-		ShipConstruct nship = ShipConstruction.LoadShip(filename);
-		print ("149");
-		ShipConstruction.PutShipToGround(nship, this.part.transform);
-		ShipConstruction.AssembleForLaunch(nship, "External Launchpad", HighLogic.CurrentGame.flagURL, state);
-		//ShipConstruction.AssembleForLaunch(nship, "External Launchpad", state);
-		Staging.beginFlight();
-		//StageManager.beginFlight();
-		nship.parts[0].vessel.ResumeStaging();
-		Staging.GenerateStagingSequence(nship.parts[0].localRoot);
-		Staging.RecalculateVesselStaging(nship.parts[0].vessel);
-		//Staging.AddStageAt (0);
-		//Staging.AddStageAt(Staging.GetStageCount(nship.Parts));
-		print ("Successfully loaded "+filename);
-		showCraftBrowser = false;
-	}
-
-	private void closed()
+    private void destroyShip(ShipConstruct nship, float availableRocketParts, float availableLiquidFuel, float availableOxidizer, float availableMonoPropellant)
     {
-        showCraftBrowser = false;
+        this.part.RequestResource("RocketParts", -availableRocketParts);
+        this.part.RequestResource("LiquidFuel", -availableLiquidFuel);
+        this.part.RequestResource("Oxidizer", -availableOxidizer);
+        this.part.RequestResource("MonoPropellant", -availableMonoPropellant);
+        nship.parts[0].localRoot.explode();
     }
 
-	public void getShip()
-	{
-		print("Initializing craft browser...");
-        //string[] path = Regex.Split(HighLogic.CurrentGame.Title, " (Sandbox)");
-        //string strpath = path[0];
-        string[] path = HighLogic.CurrentGame.Title.Split(' ');
-        Array.Resize<string>(ref path, path.Length - 1);
-		string strpath = string.Join(" ", path);
-		//if (aero) {
-		//	print (ShipConstruction.GetShipsSubfolderFor(HighLogic.LoadedScene)+"/../SPH");
-		//	craftBrowser = new CraftBrowser(new Rect(Screen.width / 2, 100, 350, 500), ShipConstruction.GetShipsSubfolderFor(HighLogic.LoadedScene)+"/../SPH",
-    	//	//"testing", "Select a ship to load", getAndLoadShip, closed, HighLogic.Skin, EditorLogic.ShipFileImage);
-		//	strpath, "Select a ship to load", getAndLoadShip, closed, HighLogic.Skin, EditorLogic.ShipFileImage);
-		//} else {
-			//craftBrowser = new CraftBrowser(new Rect(Screen.width / 2, 100, 350, 500), ShipConstruction.GetShipsSubfolderFor(HighLogic.LoadedScene),
-    		//strpath, "Select a ship to load", getAndLoadShip, closed, HighLogic.Skin, EditorLogic.ShipFileImage);
-			craftBrowser = new CraftBrowser(new Rect(Screen.width / 2, 100, 350, 500), ShipConstruction.GetShipsSubfolderFor(HighLogic.LoadedScene),strpath, "Select a ship to load", getAndLoadShip, closed, HighLogic.Skin, EditorLogic.ShipFileImage, true);
-		//}
-		showCraftBrowser = true;
-		//craftBrowser.OnGUI();
-	}
-
-	public void getPlane()
-	{
-		print("Initializing craft browser...");
-		string[] path = HighLogic.CurrentGame.Title.Split(' ');
-		Array.Resize<string>(ref path, path.Length-1);
-		string strpath = string.Join(" ", path);
-		craftBrowser = new CraftBrowser(new Rect(Screen.width / 2, 100, 350, 500), ShipConstruction.GetShipsSubfolderFor(HighLogic.LoadedScene)+"/../SPH",
-    	//"testing", "Select a ship to load", getAndLoadShip, closed, HighLogic.Skin, EditorLogic.ShipFileImage);
-		strpath, "Select a ship to load", getAndLoadShip, closed, HighLogic.Skin, EditorLogic.ShipFileImage, true);
-		
-		showCraftBrowser = true;
-	}
+    /*
+	[KSPField]
+	public bool aero = false;
+	[KSPField]
+	public bool rocket = true;
+	[KSPField]
+	public bool debug = false;
     */
 
-	private void OnGUI()
-	{
-        if (UIStatus.showcraftbrowser)
-		{
-            UIStatus.craftlist.OnGUI();
-		}
-	}
-
-    private void OnLoad()
-	{
-		bases = FlightGlobals.fetch.vessels;
-		foreach (Vessel v in bases) {
-			print (v.name);
-		}
-	}
-
-    public override void OnSave(ConfigNode node)
-    {
-        PluginConfiguration config = PluginConfiguration.CreateForType<ExLaunchPad>();
-        config.SetValue("Window Position", UIStatus.windowpos);
-        config.save();
-    }
-
-    public override void OnLoad(ConfigNode node)
-    {
-        PluginConfiguration config = PluginConfiguration.CreateForType<ExLaunchPad>();
-        config.load();
-        UIStatus.windowpos = config.GetValue<Rect>("Window Position");
-    }
-
-    [KSPEvent(active = true, guiActive = true, guiName = "Load Ship")]
-	public void toggleLandingSystem()
-	{
-			//print("Loading ship...");
-		    //getShip();
-    }
 }
+// =====================================================================================================================================================
+// =====================================================================================================================================================
+// Resource Processing
 
 public class RocketBuilder: PartModule
 {
@@ -690,3 +682,6 @@ public class Smelter: PartModule
 		part.OnJustAboutToBeDestroyed += Explode;
 	}
 }*/
+
+// =====================================================================================================================================================
+// Unused
