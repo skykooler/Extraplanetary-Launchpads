@@ -20,7 +20,9 @@ RESOURCE
 	maxAmount = 500
 }
 
-// Kethane 0.6 resource processing
+// Kethane 0.6
+
+// Ability to detect Ore
 MODULE
 {
     name = KethaneDetector
@@ -33,11 +35,7 @@ MODULE
     }
 }
 
-MODULE
-{
-    name = KethaneExtractorAnimatorLanded 
-}
-
+// Can extract Ore (A "Drill") - does not need to touch ground
 MODULE
 {
     name = KethaneExtractor
@@ -49,6 +47,13 @@ MODULE
     }
 }
 
+// Ore extractor part also needs this
+MODULE
+{
+    name = KethaneExtractorAnimatorLanded 
+}
+
+// Convert Ore to Metal
 MODULE
 {
     name = KethaneConverter
@@ -59,6 +64,7 @@ MODULE
     PowerConsumption = 10
 }
 
+// Convert Metal to RocketParts
 MODULE
 {
     name = KethaneConverter
