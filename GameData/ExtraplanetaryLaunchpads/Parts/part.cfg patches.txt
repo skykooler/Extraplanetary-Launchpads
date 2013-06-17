@@ -20,7 +20,8 @@ RESOURCE
 	maxAmount = 500
 }
 
-// Kethane 0.6
+// Kethane compatibility
+// FOR KETHANE 0.6 AND GREATER ONLY
 
 // Ability to detect Ore
 MODULE
@@ -36,6 +37,7 @@ MODULE
 }
 
 // Can extract Ore (A "Drill") - does not need to touch ground
+// If using the kethane drill part, just replace the KethaneExtractor block with this one
 MODULE
 {
     name = KethaneExtractor
@@ -47,7 +49,7 @@ MODULE
     }
 }
 
-// Ore extractor part also needs this
+// Ore extractor part may also need this
 MODULE
 {
     name = KethaneExtractorAnimatorLanded 
