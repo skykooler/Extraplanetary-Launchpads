@@ -1,8 +1,0 @@
-Based on the following projects:
-
-Extraplanetary Launchpads by Skykooler
-https://github.com/skykooler/Extraplanetary-Launchpads
-
-Resource containers - HexCans by Greys
-https://github.com/Greys0/HexCans
-

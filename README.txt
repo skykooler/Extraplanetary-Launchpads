@@ -22,3 +22,11 @@ Processing of Ore into Metal.
 Processing of Metal into RocketParts.
 
 Please report all issues at https://github.com/evilC/Extraplanetary-Launchpads/issues
+
+Based on the following projects:
+
+Extraplanetary Launchpads by Skykooler
+https://github.com/skykooler/Extraplanetary-Launchpads
+
+Resource containers - HexCans by Greys
+https://github.com/Greys0/HexCans
