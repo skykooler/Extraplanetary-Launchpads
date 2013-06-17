@@ -1,0 +1,309 @@
+ship = EL LaunchPad Test
+version = 0.20.2
+type = SPH
+PART
+{
+	part = exLaunchPad_4294484822
+	partName = Part
+	pos = -0.7300685,6.131108,-1.74318
+	rot = 0,-2.117583E-22,0,1
+	attRot = -0.7071067,-1.497357E-22,-1.497357E-22,0.7071067
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 0
+	link = trussPiece3x_4294484752
+	link = probeStackSmall_4294484712
+	attN = top,probeStackSmall_4294484712
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ExLaunchPad
+		isEnabled = True
+		EVENTS
+		{
+			ShowBuildMenu
+			{
+				active = True
+				guiActive = True
+				guiIcon = Show Build Menu
+				guiName = Show Build Menu
+				category = Show Build Menu
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			HideBuildMenu
+			{
+				active = False
+				guiActive = True
+				guiIcon = Hide Build Menu
+				guiName = Hide Build Menu
+				category = Hide Build Menu
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ShowBuildMenuAction
+			{
+				actionGroup = None
+			}
+			HideBuildMenuAction
+			{
+				actionGroup = None
+			}
+			ToggleBuildMenuAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = ModuleAnimateGeneric
+		isEnabled = True
+		animSwitch = True
+		animTime = 0
+		animSpeed = 1
+		EVENTS
+		{
+			Toggle
+			{
+				active = True
+				guiActive = True
+				guiIcon = Toggle
+				guiName = Open
+				category = Toggle
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+}
+PART
+{
+	part = trussPiece3x_4294484752
+	partName = Part
+	pos = 16.75681,6.131109,-1.74318
+	rot = -0.7071068,-0.7071068,-3.06256E-30,-3.06256E-30
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	link = trussPiece1x_4294484732
+	srfN = srfAttach,exLaunchPad_4294484822
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = trussPiece1x_4294484732
+	partName = Part
+	pos = 18.13194,5.571836,-1.74318
+	rot = -1,8.42937E-08,-2.980233E-08,2.980233E-08
+	attRot = 2.994714E-22,-4.214685E-08,-0.7071067,0.7071067
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	link = structuralPanel2_4294484682
+	srfN = srfAttach,trussPiece3x_4294484752
+	attN = top,structuralPanel2_4294484682
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = probeStackSmall_4294484712
+	partName = CommandPod
+	pos = 14.26993,6.231108,-1.74318
+	rot = 0,0,0,1
+	attRot = -0.7071068,0,0,0.7071068
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 0
+	attN = bottom,exLaunchPad_4294484822
+	EVENTS
+	{
+		MakeReference
+		{
+			active = True
+			guiActive = True
+			guiIcon = Control From Here
+			guiName = Control From Here
+			category = Control From Here
+			guiActiveUnfocused = False
+			unfocusedRange = 2
+			externalToEVAOnly = True
+		}
+		RenameVessel
+		{
+			active = True
+			guiActive = True
+			guiIcon = Rename Vessel
+			guiName = Rename Vessel
+			category = Rename Vessel
+			guiActiveUnfocused = False
+			unfocusedRange = 2
+			externalToEVAOnly = True
+		}
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleCommand
+		isEnabled = True
+		controlSrcStatusText = 
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+	}
+}
+PART
+{
+	part = structuralPanel2_4294484682
+	partName = Part
+	pos = 18.13194,5.040061,-1.74318
+	rot = 4.310158E-16,-4.310162E-16,9.127119E-38,1
+	attRot = -0.7071068,0,0,0.7071068
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 0
+	link = trussPiece3x_4294484662
+	attN = bottom,trussPiece1x_4294484732
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = trussPiece3x_4294484662
+	partName = Part
+	pos = 18.79733,6.515298,-1.74318
+	rot = -8.42937E-08,-1,2.980233E-08,-2.980233E-08
+	attRot = 0,4.214685E-08,0.7071067,0.7071067
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	link = HexCanMetalLarge_4294484642
+	link = HexCanRocketPartsLarge_4294484590
+	link = HexCanOreLarge_4294484538
+	srfN = srfAttach,structuralPanel2_4294484682
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = HexCanMetalLarge_4294484642
+	partName = Part
+	pos = 19.5221,6.515297,-1.791391
+	rot = -8.42937E-08,-0.707107,1.053671E-07,-0.7071068
+	attRot = 0,0.7071068,-4.214685E-08,0.7071068
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	srfN = srfAttach,trussPiece3x_4294484662
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = HexCanRocketPartsLarge_4294484590
+	partName = Part
+	pos = 18.81242,6.515297,-2.467749
+	rot = -1,-3.371748E-07,5.960468E-08,-5.960466E-08
+	attRot = 0,-0.7071068,4.214685E-08,0.7071068
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	srfN = srfAttach,trussPiece3x_4294484662
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = HexCanOreLarge_4294484538
+	partName = Part
+	pos = 18.74791,6.515297,-1.01861
+	rot = -1.490116E-08,-1.341105E-07,-2.528811E-07,-1
+	attRot = 1.497357E-22,-0.7071067,4.214685E-08,0.7071067
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	srfN = srfAttach,trussPiece3x_4294484662
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
