@@ -3,7 +3,7 @@ version = 0.20.2
 type = SPH
 PART
 {
-	part = exLaunchPad_4294645682
+	part = exLaunchPad_4294788290
 	partName = Part
 	pos = -0.7300685,6.131108,-1.74318
 	rot = 0,-2.117583E-22,0,1
@@ -14,10 +14,9 @@ PART
 	sidx = -1
 	sqor = -1
 	attm = 0
-	link = trussPiece3x_4294645598
-	link = probeStackSmall_4294645558
-	link = fuelLine_4294644932
-	attN = top,probeStackSmall_4294645558
+	link = trussPiece3x_4294788210
+	link = probeStackSmall_4294788170
+	attN = top,probeStackSmall_4294788170
 	EVENTS
 	{
 	}
@@ -93,53 +92,6 @@ PART
 		ACTIONS
 		{
 			ToggleAction
-			{
-				actionGroup = None
-			}
-		}
-	}
-	MODULE
-	{
-		name = ModuleGenerator
-		isEnabled = True
-		generatorIsActive = False
-		throttle = 0
-		EVENTS
-		{
-			Activate
-			{
-				active = True
-				guiActive = True
-				guiIcon = Activate Generator
-				guiName = Activate Generator
-				category = Activate Generator
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-			Shutdown
-			{
-				active = True
-				guiActive = True
-				guiIcon = Shutdown Generator
-				guiName = Shutdown Generator
-				category = Shutdown Generator
-				guiActiveUnfocused = False
-				unfocusedRange = 2
-				externalToEVAOnly = True
-			}
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = None
-			}
-			ActivateAction
-			{
-				actionGroup = None
-			}
-			ShutdownAction
 			{
 				actionGroup = None
 			}
@@ -361,7 +313,7 @@ PART
 }
 PART
 {
-	part = trussPiece3x_4294645598
+	part = trussPiece3x_4294788210
 	partName = Part
 	pos = 16.75681,6.131109,-1.74318
 	rot = -0.7071068,-0.7071068,-3.06256E-30,-3.06256E-30
@@ -372,8 +324,20 @@ PART
 	sidx = -1
 	sqor = -1
 	attm = 1
-	link = trussPiece1x_4294645578
-	srfN = srfAttach,exLaunchPad_4294645682
+	link = trussPiece1x_4294788190
+	link = rtg_4294787944
+	link = rtg_4294787918
+	link = rtg_4294787892
+	link = rtg_4294787866
+	link = ksp.r.largeBatteryPack_4294780996
+	link = ksp.r.largeBatteryPack_4294777136
+	link = ksp.r.largeBatteryPack_4294776562
+	link = ksp.r.largeBatteryPack_4294776444
+	link = rtg_4294776094
+	link = rtg_4294775244
+	link = rtg_4294774316
+	link = rtg_4294773896
+	srfN = srfAttach,exLaunchPad_4294788290
 	EVENTS
 	{
 	}
@@ -383,7 +347,7 @@ PART
 }
 PART
 {
-	part = trussPiece1x_4294645578
+	part = trussPiece1x_4294788190
 	partName = Part
 	pos = 18.13194,5.571836,-1.74318
 	rot = -1,8.42937E-08,-2.980233E-08,2.980233E-08
@@ -394,9 +358,9 @@ PART
 	sidx = -1
 	sqor = -1
 	attm = 1
-	link = structuralPanel2_4294645528
-	srfN = srfAttach,trussPiece3x_4294645598
-	attN = top,structuralPanel2_4294645528
+	link = structuralPanel2_4294788140
+	srfN = srfAttach,trussPiece3x_4294788210
+	attN = top,structuralPanel2_4294788140
 	EVENTS
 	{
 	}
@@ -406,7 +370,7 @@ PART
 }
 PART
 {
-	part = probeStackSmall_4294645558
+	part = probeStackSmall_4294788170
 	partName = CommandPod
 	pos = 14.26993,6.231108,-1.74318
 	rot = 0,0,0,1
@@ -417,7 +381,7 @@ PART
 	sidx = -1
 	sqor = -1
 	attm = 0
-	attN = bottom,exLaunchPad_4294645682
+	attN = bottom,exLaunchPad_4294788290
 	EVENTS
 	{
 		MakeReference
@@ -461,7 +425,7 @@ PART
 }
 PART
 {
-	part = structuralPanel2_4294645528
+	part = structuralPanel2_4294788140
 	partName = Part
 	pos = 18.13194,5.040061,-1.74318
 	rot = 4.310158E-16,-4.310162E-16,9.127119E-38,1
@@ -472,8 +436,8 @@ PART
 	sidx = -1
 	sqor = -1
 	attm = 0
-	link = trussPiece3x_4294645508
-	attN = bottom,trussPiece1x_4294645578
+	link = trussPiece3x_4294788120
+	attN = bottom,trussPiece1x_4294788190
 	EVENTS
 	{
 	}
@@ -483,7 +447,7 @@ PART
 }
 PART
 {
-	part = trussPiece3x_4294645508
+	part = trussPiece3x_4294788120
 	partName = Part
 	pos = 18.79733,6.515296,-1.74318
 	rot = -8.42937E-08,-1,2.980233E-08,-2.980233E-08
@@ -494,14 +458,10 @@ PART
 	sidx = -1
 	sqor = -1
 	attm = 1
-	link = HexCanMetalLarge_4294645488
-	link = HexCanRocketPartsLarge_4294645436
-	link = HexCanOreLarge_4294645384
-	link = fuelLine_4294645252
-	link = fuelLine_4294645172
-	link = fuelLine_4294645092
-	link = fuelLine_4294645012
-	srfN = srfAttach,structuralPanel2_4294645528
+	link = HexCanMetalLarge_4294788100
+	link = HexCanRocketPartsLarge_4294788048
+	link = HexCanOreLarge_4294787996
+	srfN = srfAttach,structuralPanel2_4294788140
 	EVENTS
 	{
 	}
@@ -511,7 +471,7 @@ PART
 }
 PART
 {
-	part = HexCanMetalLarge_4294645488
+	part = HexCanMetalLarge_4294788100
 	partName = Part
 	pos = 19.5221,6.515296,-1.791391
 	rot = -8.42937E-08,-0.707107,1.264406E-07,-0.7071068
@@ -522,9 +482,7 @@ PART
 	sidx = -1
 	sqor = -1
 	attm = 1
-	link = fuelLine_4294645332
-	link = trussPiece1x_4294644852
-	srfN = srfAttach,trussPiece3x_4294645508
+	srfN = srfAttach,trussPiece3x_4294788120
 	EVENTS
 	{
 	}
@@ -534,10 +492,10 @@ PART
 }
 PART
 {
-	part = HexCanRocketPartsLarge_4294645436
+	part = HexCanRocketPartsLarge_4294788048
 	partName = Part
 	pos = 18.81242,6.515296,-2.467749
-	rot = -1,-3.371748E-07,5.960469E-08,-5.960469E-08
+	rot = -1,-3.371748E-07,5.960469E-08,-5.960468E-08
 	attRot = 0,-0.7071068,4.214685E-08,0.7071068
 	mir = 1,1,1
 	istg = 0
@@ -545,7 +503,7 @@ PART
 	sidx = -1
 	sqor = -1
 	attm = 1
-	srfN = srfAttach,trussPiece3x_4294645508
+	srfN = srfAttach,trussPiece3x_4294788120
 	EVENTS
 	{
 	}
@@ -555,7 +513,7 @@ PART
 }
 PART
 {
-	part = HexCanOreLarge_4294645384
+	part = HexCanOreLarge_4294787996
 	partName = Part
 	pos = 18.74791,6.515296,-1.01861
 	rot = -1.490116E-08,-1.341105E-07,-2.528811E-07,-1
@@ -566,7 +524,7 @@ PART
 	sidx = -1
 	sqor = -1
 	attm = 1
-	srfN = srfAttach,trussPiece3x_4294645508
+	srfN = srfAttach,trussPiece3x_4294788120
 	EVENTS
 	{
 	}
@@ -576,151 +534,295 @@ PART
 }
 PART
 {
-	part = fuelLine_4294645332
-	partName = FuelLine
-	pos = 19.33584,6.465384,-1.518693
-	rot = 0.4829631,0.6294097,-0.3705909,0.4829626
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 1
-	cData = tgt: trussPiece3x_4; pos: -0.04045112,-0.1908812,-0.1290895; dir: -0.1728944,-0.8158793,-0.5517684; rot: -0.6830125,-0.7071071,-0.1830125,-3.582482E-07
-	srfN = srfAttach,HexCanMetalLarge_4294645488
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-}
-PART
-{
-	part = fuelLine_4294645252
-	partName = FuelLine
-	pos = 18.79733,7.891419,-1.502984
-	rot = -0.5000001,0.5000001,0.5,-0.5000001
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 1
-	cData = tgt: HexCanOreLarge_10; pos: -0.05241154,0.1129036,-0.01349827; dir: -0.4185896,0.9017544,-0.1078045; rot: 0.1464462,-0.3535531,-0.8535538,0.353553
-	srfN = srfAttach,trussPiece3x_4294645508
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-}
-PART
-{
-	part = fuelLine_4294645172
-	partName = FuelLine
-	pos = 18.79733,7.89057,-1.711008
-	rot = 0.5000001,-0.5000001,-0.5000001,0.5000001
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 1
-	cData = tgt: HexCanMetalLarge_5; pos: -0.08835104,-0.03452111,-0.3883953; dir: -0.2209768,-0.08634007,-0.9714497; rot: 0.3826831,-2.950279E-07,0.9238797,2.950279E-07
-	srfN = srfAttach,trussPiece3x_4294645508
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-}
-PART
-{
-	part = fuelLine_4294645092
-	partName = FuelLine
-	pos = 18.79733,7.890379,-1.892162
-	rot = 0.5000001,-0.5000001,-0.5000001,0.5000001
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 1
-	cData = tgt: HexCanRocketPartsLarge_9; pos: -0.07449386,-0.2251653,-0.06054505; dir: -0.3043248,-0.9198917,-0.2473575; rot: -0.1464469,-0.3535531,0.8535536,0.3535531
-	srfN = srfAttach,trussPiece3x_4294645508
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-}
-PART
-{
-	part = fuelLine_4294645012
-	partName = FuelLine
-	pos = 18.51846,7.556056,-1.703282
-	rot = -0.5609856,0.4304594,0.4304594,-0.5609856
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 1
-	cData = tgt: exLaunchPad_0; pos: 0.4875968,1.264982,3.685853; dir: 0.1241569,0.3221022,0.9385282; rot: 0.1305264,-1.264406E-07,-0.9914448,1.63319E-07
-	srfN = srfAttach,trussPiece3x_4294645508
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-}
-PART
-{
-	part = fuelLine_4294644932
-	partName = FuelLine
-	pos = 15.07464,6.131109,-3.062916
-	rot = -1.667123E-07,-0.7071069,-0.7071067,4.750303E-08
-	attRot = 0,0,0,1
-	mir = 1,1,1
-	istg = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	attm = 1
-	cData = tgt: trussPiece3x_4; pos: -3.398123,1.145278,1.509279; dir: -0.8734169,0.2943707,0.3879288; rot: 1.264405E-07,-8.429368E-08,1.514731E-07,-1
-	srfN = srfAttach,exLaunchPad_4294645682
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-}
-PART
-{
-	part = trussPiece1x_4294644852
+	part = rtg_4294787944
 	partName = Part
-	pos = 20.43517,6.869087,-1.791391
-	rot = -0.4999999,-0.5000001,0.5000004,-0.4999999
-	attRot = 0.2705981,0.6532815,-0.2705981,0.6532815
+	pos = 15.94038,6.131109,-1.091807
+	rot = -0.5000001,0.5,0.5,-0.5000002
+	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
 	dstg = 0
 	sidx = -1
 	sqor = -1
 	attm = 1
-	link = fuelTank1-2_4294644832
-	srfN = srfAttach,HexCanMetalLarge_4294645488
+	sym = rtg_4294787918
+	srfN = srfAttach,trussPiece3x_4294788210
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleGenerator
+		isEnabled = True
+		generatorIsActive = False
+		throttle = 0
+		EVENTS
+		{
+			Activate
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Generator
+				guiName = Activate Generator
+				category = Activate Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			Shutdown
+			{
+				active = True
+				guiActive = True
+				guiIcon = Shutdown Generator
+				guiName = Shutdown Generator
+				category = Shutdown Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+			ActivateAction
+			{
+				actionGroup = None
+			}
+			ShutdownAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+}
+PART
+{
+	part = rtg_4294787918
+	partName = Part
+	pos = 17.57324,6.131109,-1.091807
+	rot = 0.5000002,0.5,0.5,0.5000001
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	sym = rtg_4294787944
+	srfN = srfAttach,trussPiece3x_4294788210
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleGenerator
+		isEnabled = True
+		generatorIsActive = False
+		throttle = 0
+		EVENTS
+		{
+			Activate
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Generator
+				guiName = Activate Generator
+				category = Activate Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			Shutdown
+			{
+				active = True
+				guiActive = True
+				guiIcon = Shutdown Generator
+				guiName = Shutdown Generator
+				category = Shutdown Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+			ActivateAction
+			{
+				actionGroup = None
+			}
+			ShutdownAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+}
+PART
+{
+	part = rtg_4294787892
+	partName = Part
+	pos = 15.98486,6.131109,-2.394553
+	rot = 0.5,-0.5000002,0.5000002,-0.5
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	sym = rtg_4294787866
+	srfN = srfAttach,trussPiece3x_4294788210
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleGenerator
+		isEnabled = True
+		generatorIsActive = False
+		throttle = 0
+		EVENTS
+		{
+			Activate
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Generator
+				guiName = Activate Generator
+				category = Activate Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			Shutdown
+			{
+				active = True
+				guiActive = True
+				guiIcon = Shutdown Generator
+				guiName = Shutdown Generator
+				category = Shutdown Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+			ActivateAction
+			{
+				actionGroup = None
+			}
+			ShutdownAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+}
+PART
+{
+	part = rtg_4294787866
+	partName = Part
+	pos = 17.52876,6.131109,-2.394553
+	rot = 0.5000002,0.5000002,-0.5000001,-0.4999998
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	sym = rtg_4294787892
+	srfN = srfAttach,trussPiece3x_4294788210
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleGenerator
+		isEnabled = True
+		generatorIsActive = False
+		throttle = 0
+		EVENTS
+		{
+			Activate
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Generator
+				guiName = Activate Generator
+				category = Activate Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			Shutdown
+			{
+				active = True
+				guiActive = True
+				guiIcon = Shutdown Generator
+				guiName = Shutdown Generator
+				category = Shutdown Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+			ActivateAction
+			{
+				actionGroup = None
+			}
+			ShutdownAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+}
+PART
+{
+	part = ksp.r.largeBatteryPack_4294780996
+	partName = Part
+	pos = 15.69839,6.45568,-1.674716
+	rot = 0.4999999,0.5,-0.5,0.5000002
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	sym = ksp.r.largeBatteryPack_4294777136
+	srfN = srfAttach,trussPiece3x_4294788210
 	EVENTS
 	{
 	}
@@ -730,22 +832,343 @@ PART
 }
 PART
 {
-	part = fuelTank1-2_4294644832
+	part = ksp.r.largeBatteryPack_4294777136
 	partName = Part
-	pos = 22.17663,6.869086,-1.791393
-	rot = -3.916662E-07,-1.490116E-07,-1,-1.685874E-07
-	attRot = 0,-0.7071068,4.214685E-08,0.7071068
+	pos = 17.81523,6.455679,-1.674716
+	rot = 0.5,-0.5000001,0.5000001,0.5000002
+	attRot = 0,0,0,1
 	mir = 1,1,1
 	istg = 0
 	dstg = 0
 	sidx = -1
 	sqor = -1
 	attm = 1
-	srfN = srfAttach,trussPiece1x_4294644852
+	sym = ksp.r.largeBatteryPack_4294780996
+	srfN = srfAttach,trussPiece3x_4294788210
 	EVENTS
 	{
 	}
 	ACTIONS
 	{
+	}
+}
+PART
+{
+	part = ksp.r.largeBatteryPack_4294776562
+	partName = Part
+	pos = 17.1478,6.455679,-1.672488
+	rot = 0.4999999,0.5,-0.5,0.5000002
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	sym = ksp.r.largeBatteryPack_4294776444
+	srfN = srfAttach,trussPiece3x_4294788210
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = ksp.r.largeBatteryPack_4294776444
+	partName = Part
+	pos = 16.36582,6.455679,-1.672488
+	rot = 0.5,-0.5000001,0.5000001,0.5000002
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	sym = ksp.r.largeBatteryPack_4294776562
+	srfN = srfAttach,trussPiece3x_4294788210
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = rtg_4294776094
+	partName = Part
+	pos = 17.06638,6.131109,-1.091808
+	rot = 0.5000001,0.5000001,0.5000001,0.4999999
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	sym = rtg_4294775244
+	srfN = srfAttach,trussPiece3x_4294788210
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleGenerator
+		isEnabled = True
+		generatorIsActive = False
+		throttle = 0
+		EVENTS
+		{
+			Activate
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Generator
+				guiName = Activate Generator
+				category = Activate Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			Shutdown
+			{
+				active = True
+				guiActive = True
+				guiIcon = Shutdown Generator
+				guiName = Shutdown Generator
+				category = Shutdown Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+			ActivateAction
+			{
+				actionGroup = None
+			}
+			ShutdownAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+}
+PART
+{
+	part = rtg_4294775244
+	partName = Part
+	pos = 16.44724,6.131109,-1.091808
+	rot = -0.5000001,0.5000001,0.5000001,-0.4999999
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	sym = rtg_4294776094
+	srfN = srfAttach,trussPiece3x_4294788210
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleGenerator
+		isEnabled = True
+		generatorIsActive = False
+		throttle = 0
+		EVENTS
+		{
+			Activate
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Generator
+				guiName = Activate Generator
+				category = Activate Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			Shutdown
+			{
+				active = True
+				guiActive = True
+				guiIcon = Shutdown Generator
+				guiName = Shutdown Generator
+				category = Shutdown Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+			ActivateAction
+			{
+				actionGroup = None
+			}
+			ShutdownAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+}
+PART
+{
+	part = rtg_4294774316
+	partName = Part
+	pos = 16.50404,6.131109,-2.394552
+	rot = 0.5000003,-0.5000001,0.4999998,-0.5
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	sym = rtg_4294773896
+	srfN = srfAttach,trussPiece3x_4294788210
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleGenerator
+		isEnabled = True
+		generatorIsActive = False
+		throttle = 0
+		EVENTS
+		{
+			Activate
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Generator
+				guiName = Activate Generator
+				category = Activate Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			Shutdown
+			{
+				active = True
+				guiActive = True
+				guiIcon = Shutdown Generator
+				guiName = Shutdown Generator
+				category = Shutdown Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+			ActivateAction
+			{
+				actionGroup = None
+			}
+			ShutdownAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+}
+PART
+{
+	part = rtg_4294773896
+	partName = Part
+	pos = 17.00957,6.131109,-2.394552
+	rot = 0.5000003,0.5000001,-0.4999999,-0.5
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	sym = rtg_4294774316
+	srfN = srfAttach,trussPiece3x_4294788210
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleGenerator
+		isEnabled = True
+		generatorIsActive = False
+		throttle = 0
+		EVENTS
+		{
+			Activate
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Generator
+				guiName = Activate Generator
+				category = Activate Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			Shutdown
+			{
+				active = True
+				guiActive = True
+				guiIcon = Shutdown Generator
+				guiName = Shutdown Generator
+				category = Shutdown Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+			ActivateAction
+			{
+				actionGroup = None
+			}
+			ShutdownAction
+			{
+				actionGroup = None
+			}
+		}
 	}
 }
