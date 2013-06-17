@@ -1,0 +1,751 @@
+ship = EL LaunchPad Test
+version = 0.20.2
+type = SPH
+PART
+{
+	part = exLaunchPad_4294645682
+	partName = Part
+	pos = -0.7300685,6.131108,-1.74318
+	rot = 0,-2.117583E-22,0,1
+	attRot = -0.7071067,-1.497357E-22,-1.497357E-22,0.7071067
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 0
+	link = trussPiece3x_4294645598
+	link = probeStackSmall_4294645558
+	link = fuelLine_4294644932
+	attN = top,probeStackSmall_4294645558
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ExLaunchPad
+		isEnabled = True
+		EVENTS
+		{
+			ShowBuildMenu
+			{
+				active = True
+				guiActive = True
+				guiIcon = Show Build Menu
+				guiName = Show Build Menu
+				category = Show Build Menu
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			HideBuildMenu
+			{
+				active = False
+				guiActive = True
+				guiIcon = Hide Build Menu
+				guiName = Hide Build Menu
+				category = Hide Build Menu
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ShowBuildMenuAction
+			{
+				actionGroup = None
+			}
+			HideBuildMenuAction
+			{
+				actionGroup = None
+			}
+			ToggleBuildMenuAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = ModuleAnimateGeneric
+		isEnabled = True
+		animSwitch = True
+		animTime = 0
+		animSpeed = 1
+		EVENTS
+		{
+			Toggle
+			{
+				active = True
+				guiActive = True
+				guiIcon = Toggle
+				guiName = Open
+				category = Toggle
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = ModuleGenerator
+		isEnabled = True
+		generatorIsActive = False
+		throttle = 0
+		EVENTS
+		{
+			Activate
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Generator
+				guiName = Activate Generator
+				category = Activate Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			Shutdown
+			{
+				active = True
+				guiActive = True
+				guiIcon = Shutdown Generator
+				guiName = Shutdown Generator
+				category = Shutdown Generator
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+			ActivateAction
+			{
+				actionGroup = None
+			}
+			ShutdownAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = KethaneDetector
+		isEnabled = True
+		EVENTS
+		{
+			EnableDetection
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Detector
+				guiName = Activate Detector
+				category = Activate Detector
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			DisableDetection
+			{
+				active = False
+				guiActive = True
+				guiIcon = Deactivate Detector
+				guiName = Deactivate Detector
+				category = Deactivate Detector
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			ShowMap
+			{
+				active = True
+				guiActive = True
+				guiIcon = Show Map
+				guiName = Show Map
+				category = Show Map
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			HideMap
+			{
+				active = False
+				guiActive = True
+				guiIcon = Hide Map
+				guiName = Hide Map
+				category = Hide Map
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			EnableDetectionAction
+			{
+				actionGroup = None
+			}
+			DisableDetectionAction
+			{
+				actionGroup = None
+			}
+			ToggleDetectionAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = KethaneExtractor
+		isEnabled = True
+		EVENTS
+		{
+			DeployDrill
+			{
+				active = True
+				guiActive = True
+				guiIcon = Deploy Drill
+				guiName = Deploy Drill
+				category = Deploy Drill
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			RetractDrill
+			{
+				active = False
+				guiActive = True
+				guiIcon = Retract Drill
+				guiName = Retract Drill
+				category = Retract Drill
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			DeployDrillAction
+			{
+				actionGroup = None
+			}
+			RetractDrillAction
+			{
+				actionGroup = None
+			}
+			ToggleDrillAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = KethaneExtractorAnimatorLanded
+		isEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+	}
+	MODULE
+	{
+		name = KethaneConverter
+		isEnabled = True
+		EVENTS
+		{
+			ActivateConverter
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Converter
+				guiName = Activate Metal Converter
+				category = Activate Converter
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			DeactivateConverter
+			{
+				active = False
+				guiActive = True
+				guiIcon = Deactivate Converter
+				guiName = Deactivate Metal Converter
+				category = Deactivate Converter
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ActivateConverterAction
+			{
+				actionGroup = None
+			}
+			DeactivateConverterAction
+			{
+				actionGroup = None
+			}
+			ToggleConverterAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+	MODULE
+	{
+		name = KethaneConverter
+		isEnabled = True
+		EVENTS
+		{
+			ActivateConverter
+			{
+				active = True
+				guiActive = True
+				guiIcon = Activate Converter
+				guiName = Activate RocketParts Converter
+				category = Activate Converter
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+			DeactivateConverter
+			{
+				active = False
+				guiActive = True
+				guiIcon = Deactivate Converter
+				guiName = Deactivate RocketParts Converter
+				category = Deactivate Converter
+				guiActiveUnfocused = False
+				unfocusedRange = 2
+				externalToEVAOnly = True
+			}
+		}
+		ACTIONS
+		{
+			ActivateConverterAction
+			{
+				actionGroup = None
+			}
+			DeactivateConverterAction
+			{
+				actionGroup = None
+			}
+			ToggleConverterAction
+			{
+				actionGroup = None
+			}
+		}
+	}
+}
+PART
+{
+	part = trussPiece3x_4294645598
+	partName = Part
+	pos = 16.75681,6.131109,-1.74318
+	rot = -0.7071068,-0.7071068,-3.06256E-30,-3.06256E-30
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	link = trussPiece1x_4294645578
+	srfN = srfAttach,exLaunchPad_4294645682
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = trussPiece1x_4294645578
+	partName = Part
+	pos = 18.13194,5.571836,-1.74318
+	rot = -1,8.42937E-08,-2.980233E-08,2.980233E-08
+	attRot = 2.994714E-22,-4.214685E-08,-0.7071067,0.7071067
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	link = structuralPanel2_4294645528
+	srfN = srfAttach,trussPiece3x_4294645598
+	attN = top,structuralPanel2_4294645528
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = probeStackSmall_4294645558
+	partName = CommandPod
+	pos = 14.26993,6.231108,-1.74318
+	rot = 0,0,0,1
+	attRot = -0.7071068,0,0,0.7071068
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 0
+	attN = bottom,exLaunchPad_4294645682
+	EVENTS
+	{
+		MakeReference
+		{
+			active = True
+			guiActive = True
+			guiIcon = Control From Here
+			guiName = Control From Here
+			category = Control From Here
+			guiActiveUnfocused = False
+			unfocusedRange = 2
+			externalToEVAOnly = True
+		}
+		RenameVessel
+		{
+			active = True
+			guiActive = True
+			guiIcon = Rename Vessel
+			guiName = Rename Vessel
+			category = Rename Vessel
+			guiActiveUnfocused = False
+			unfocusedRange = 2
+			externalToEVAOnly = True
+		}
+	}
+	ACTIONS
+	{
+	}
+	MODULE
+	{
+		name = ModuleCommand
+		isEnabled = True
+		controlSrcStatusText = 
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+	}
+}
+PART
+{
+	part = structuralPanel2_4294645528
+	partName = Part
+	pos = 18.13194,5.040061,-1.74318
+	rot = 4.310158E-16,-4.310162E-16,9.127119E-38,1
+	attRot = -0.7071068,0,0,0.7071068
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 0
+	link = trussPiece3x_4294645508
+	attN = bottom,trussPiece1x_4294645578
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = trussPiece3x_4294645508
+	partName = Part
+	pos = 18.79733,6.515296,-1.74318
+	rot = -8.42937E-08,-1,2.980233E-08,-2.980233E-08
+	attRot = 0,4.214685E-08,0.7071067,0.7071067
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	link = HexCanMetalLarge_4294645488
+	link = HexCanRocketPartsLarge_4294645436
+	link = HexCanOreLarge_4294645384
+	link = fuelLine_4294645252
+	link = fuelLine_4294645172
+	link = fuelLine_4294645092
+	link = fuelLine_4294645012
+	srfN = srfAttach,structuralPanel2_4294645528
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = HexCanMetalLarge_4294645488
+	partName = Part
+	pos = 19.5221,6.515296,-1.791391
+	rot = -8.42937E-08,-0.707107,1.264406E-07,-0.7071068
+	attRot = 0,0.7071068,-4.214685E-08,0.7071068
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	link = fuelLine_4294645332
+	link = trussPiece1x_4294644852
+	srfN = srfAttach,trussPiece3x_4294645508
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = HexCanRocketPartsLarge_4294645436
+	partName = Part
+	pos = 18.81242,6.515296,-2.467749
+	rot = -1,-3.371748E-07,5.960469E-08,-5.960469E-08
+	attRot = 0,-0.7071068,4.214685E-08,0.7071068
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	srfN = srfAttach,trussPiece3x_4294645508
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = HexCanOreLarge_4294645384
+	partName = Part
+	pos = 18.74791,6.515296,-1.01861
+	rot = -1.490116E-08,-1.341105E-07,-2.528811E-07,-1
+	attRot = 1.497357E-22,-0.7071067,4.214685E-08,0.7071067
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	srfN = srfAttach,trussPiece3x_4294645508
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = fuelLine_4294645332
+	partName = FuelLine
+	pos = 19.33584,6.465384,-1.518693
+	rot = 0.4829631,0.6294097,-0.3705909,0.4829626
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	cData = tgt: trussPiece3x_4; pos: -0.04045112,-0.1908812,-0.1290895; dir: -0.1728944,-0.8158793,-0.5517684; rot: -0.6830125,-0.7071071,-0.1830125,-3.582482E-07
+	srfN = srfAttach,HexCanMetalLarge_4294645488
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = fuelLine_4294645252
+	partName = FuelLine
+	pos = 18.79733,7.891419,-1.502984
+	rot = -0.5000001,0.5000001,0.5,-0.5000001
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	cData = tgt: HexCanOreLarge_10; pos: -0.05241154,0.1129036,-0.01349827; dir: -0.4185896,0.9017544,-0.1078045; rot: 0.1464462,-0.3535531,-0.8535538,0.353553
+	srfN = srfAttach,trussPiece3x_4294645508
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = fuelLine_4294645172
+	partName = FuelLine
+	pos = 18.79733,7.89057,-1.711008
+	rot = 0.5000001,-0.5000001,-0.5000001,0.5000001
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	cData = tgt: HexCanMetalLarge_5; pos: -0.08835104,-0.03452111,-0.3883953; dir: -0.2209768,-0.08634007,-0.9714497; rot: 0.3826831,-2.950279E-07,0.9238797,2.950279E-07
+	srfN = srfAttach,trussPiece3x_4294645508
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = fuelLine_4294645092
+	partName = FuelLine
+	pos = 18.79733,7.890379,-1.892162
+	rot = 0.5000001,-0.5000001,-0.5000001,0.5000001
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	cData = tgt: HexCanRocketPartsLarge_9; pos: -0.07449386,-0.2251653,-0.06054505; dir: -0.3043248,-0.9198917,-0.2473575; rot: -0.1464469,-0.3535531,0.8535536,0.3535531
+	srfN = srfAttach,trussPiece3x_4294645508
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = fuelLine_4294645012
+	partName = FuelLine
+	pos = 18.51846,7.556056,-1.703282
+	rot = -0.5609856,0.4304594,0.4304594,-0.5609856
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	cData = tgt: exLaunchPad_0; pos: 0.4875968,1.264982,3.685853; dir: 0.1241569,0.3221022,0.9385282; rot: 0.1305264,-1.264406E-07,-0.9914448,1.63319E-07
+	srfN = srfAttach,trussPiece3x_4294645508
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = fuelLine_4294644932
+	partName = FuelLine
+	pos = 15.07464,6.131109,-3.062916
+	rot = -1.667123E-07,-0.7071069,-0.7071067,4.750303E-08
+	attRot = 0,0,0,1
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	cData = tgt: trussPiece3x_4; pos: -3.398123,1.145278,1.509279; dir: -0.8734169,0.2943707,0.3879288; rot: 1.264405E-07,-8.429368E-08,1.514731E-07,-1
+	srfN = srfAttach,exLaunchPad_4294645682
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = trussPiece1x_4294644852
+	partName = Part
+	pos = 20.43517,6.869087,-1.791391
+	rot = -0.4999999,-0.5000001,0.5000004,-0.4999999
+	attRot = 0.2705981,0.6532815,-0.2705981,0.6532815
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	link = fuelTank1-2_4294644832
+	srfN = srfAttach,HexCanMetalLarge_4294645488
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
+PART
+{
+	part = fuelTank1-2_4294644832
+	partName = Part
+	pos = 22.17663,6.869086,-1.791393
+	rot = -3.916662E-07,-1.490116E-07,-1,-1.685874E-07
+	attRot = 0,-0.7071068,4.214685E-08,0.7071068
+	mir = 1,1,1
+	istg = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	attm = 1
+	srfN = srfAttach,trussPiece1x_4294644852
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+}
