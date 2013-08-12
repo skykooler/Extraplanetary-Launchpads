@@ -73,18 +73,15 @@ public class ExLaunchPad : PartModule
 		padResources.TransferResource("RocketParts", -uis.minRocketParts);
 
 		// use resources
-		foreach (KeyValuePair<string, double> pair in uis.requiredresources)
-		{
+		foreach (KeyValuePair<string, double> pair in uis.requiredresources) {
 			// If resource is "JetFuel", rename to "LiquidFuel"
 			string res = pair.Key;
-			if (pair.Key == "JetFuel")
-			{
+			if (pair.Key == "JetFuel") {
 				res = "LiquidFuel";
 				if (pair.Value == 0)
 					continue;
 			}
-			if (!uis.resourcesliders.ContainsKey(pair.Key))
-			{
+			if (!uis.resourcesliders.ContainsKey(pair.Key)) {
 				Debug.Log(String.Format("[EL] missing slider {0}", pair.Key));
 				continue;
 			}
@@ -213,14 +210,12 @@ public class ExLaunchPad : PartModule
 		GUILayout.BeginHorizontal("box");
 		GUILayout.FlexibleSpace();
 		// VAB / SPH selection
-		if (GUILayout.Toggle(uis.showvab, "VAB", GUILayout.Width(80)))
-		{
+		if (GUILayout.Toggle(uis.showvab, "VAB", GUILayout.Width(80))) {
 			uis.showvab = true;
 			uis.showsph = false;
 			uis.ct = crafttype.VAB;
 		}
-		if (GUILayout.Toggle(uis.showsph, "SPH"))
-		{
+		if (GUILayout.Toggle(uis.showsph, "SPH")) {
 			uis.showvab = false;
 			uis.showsph = true;
 			uis.ct = crafttype.SPH;
@@ -230,14 +225,13 @@ public class ExLaunchPad : PartModule
 
 		string strpath = HighLogic.CurrentGame.Title.Split(new string[] { " (Sandbox)" }, StringSplitOptions.None).First();
 
-		if (GUILayout.Button("Select Craft", mySty, GUILayout.ExpandWidth(true)))//GUILayout.Button is "true" when clicked
-		{
+		if (GUILayout.Button("Select Craft", mySty, GUILayout.ExpandWidth(true))) {
+			//GUILayout.Button is "true" when clicked
 			uis.craftlist = new CraftBrowser(new Rect(Screen.width / 2, 100, 350, 500), uis.ct.ToString(), strpath, "Select a ship to load", craftSelectComplete, craftSelectCancel, HighLogic.Skin, EditorLogic.ShipFileImage, true);
 			uis.showcraftbrowser = true;
 		}
 
-		if (uis.craftselected)
-		{
+		if (uis.craftselected) {
 			GUILayout.Box("Selected Craft:	" + uis.craftnode.GetValue("ship"), whiSty);
 
 			// Resource requirements
@@ -263,15 +257,12 @@ public class ExLaunchPad : PartModule
 			// LFO = 55% oxidizer
 
 			// Cycle through required resources
-			foreach (KeyValuePair<string, double> pair in uis.requiredresources)
-			{
+			foreach (KeyValuePair<string, double> pair in uis.requiredresources) {
 				string resname = pair.Key;	// Holds REAL resource name. May need to translate from "JetFuel" back to "LiquidFuel"
 				string reslabel = resname;	 // Resource name for DISPLAY purposes only. Internally the app uses pair.Key
-				if (reslabel == "JetFuel")
-				{
-					// Do not show JetFuel line if not being used
-					if (pair.Value == 0f)
-					{
+				if (reslabel == "JetFuel") {
+					if (pair.Value == 0f) {
+						// Do not show JetFuel line if not being used
 						continue;
 					}
 					//resname = "JetFuel";
@@ -279,12 +270,10 @@ public class ExLaunchPad : PartModule
 				}
 
 				// If in link LFO sliders mode, rename Oxidizer to LFO (Oxidizer) and LiquidFuel to LFO (LiquidFuel)
-				if (reslabel == "Oxidizer")
-				{
+				if (reslabel == "Oxidizer") {
 					reslabel = "RocketFuel (Ox)";
 				}
-				if (reslabel == "LiquidFuel")
-				{
+				if (reslabel == "LiquidFuel") {
 					reslabel = "RocketFuel (LF)";
 				}
 
@@ -292,9 +281,7 @@ public class ExLaunchPad : PartModule
 
 				// Resource name
 				GUILayout.Box(reslabel, whiSty, GUILayout.Width(120), GUILayout.Height(40));
-				// Add resource to Dictionary if it does not exist
-				if (!uis.resourcesliders.ContainsKey(pair.Key))
-				{
+				if (!uis.resourcesliders.ContainsKey(pair.Key)) {
 					uis.resourcesliders.Add(pair.Key, 1);
 				}
 
@@ -373,10 +360,8 @@ public class ExLaunchPad : PartModule
 			GUILayout.EndScrollView();
 
 			// Build button
-			if (uis.canbuildcraft)
-			{
-				if (GUILayout.Button("Build", mySty, GUILayout.ExpandWidth(true)))
-				{
+			if (uis.canbuildcraft) {
+				if (GUILayout.Button("Build", mySty, GUILayout.ExpandWidth(true))) {
 					BuildAndLaunchCraft();
 					// Reset the UI
 					uis.craftselected = false;
@@ -386,27 +371,21 @@ public class ExLaunchPad : PartModule
 					// Close the UI
 					HideBuildMenu();
 				}
-			}
-			else
-			{
+			} else {
 				GUILayout.Box("You do not have the resources to build this craft", redSty);
 			}
-		}
-		else
-		{
+		} else {
 			GUILayout.Box("You must select a craft before you can build", redSty);
 		}
 		GUILayout.EndVertical();
 
 		GUILayout.BeginHorizontal();
 		GUILayout.FlexibleSpace();
-		if (GUILayout.Button("Close"))
-		{
+		if (GUILayout.Button("Close")) {
 			HideBuildMenu();
 		}
 
 		uis.showbuilduionload = GUILayout.Toggle(uis.showbuilduionload, "Show on StartUp");
-
 
 		GUILayout.FlexibleSpace();
 		GUILayout.EndHorizontal();
@@ -456,8 +435,7 @@ public class ExLaunchPad : PartModule
 	private void Start()
 	{
 		// If "Show GUI on StartUp" ticked, show the GUI
-		if (uis.showbuilduionload)
-		{
+		if (uis.showbuilduionload) {
 			ShowBuildMenu();
 		}
 	}
@@ -471,24 +449,18 @@ public class ExLaunchPad : PartModule
 		// Landed / Flying check should probably be with this code, but moved it elsewhere while this is firing so often
 
 		// Does the UI want to be visible?
-		if (uis.builduiactive)
-		{
+		if (uis.builduiactive) {
 			// Decide if the build menu is allowed to be visible
-			if (this.vessel == FlightGlobals.ActiveVessel)
-			{
+			if (this.vessel == FlightGlobals.ActiveVessel) {
 				// Yes - check if it is currently not visible
-				if (!uis.builduivisible)
-				{
+				if (!uis.builduivisible) {
 					// Going from invisible to visible
 					uis.builduivisible = true;
 					RenderingManager.AddToPostDrawQueue(3, new Callback(drawGUI)); //start the GUI
 				}
-			}
-			else
-			{
+			} else {
 				// No - check if it is currently visible
-				if (uis.builduivisible)
-				{
+				if (uis.builduivisible) {
 					// Going from visible to invisible
 					uis.builduivisible = false;
 					RenderingManager.RemoveFromPostDrawQueue(3, new Callback(drawGUI)); //stop the GUI
@@ -502,12 +474,9 @@ public class ExLaunchPad : PartModule
 	// ToDo: Cannot seem to get this code to fire...
 	private void OnVesselChange()
 	{
-		if (this.vessel == FlightGlobals.ActiveVessel)
-		{
+		if (this.vessel == FlightGlobals.ActiveVessel) {
 			ShowBuildMenu();
-		}
-		else
-		{
+		} else {
 			HideBuildMenu();
 		}
 	}
@@ -515,11 +484,9 @@ public class ExLaunchPad : PartModule
 
 	public void Update()
 	{
-		if (uis.vessel && uis.timer >= 0)
-		{
+		if (uis.vessel && uis.timer >= 0) {
 			uis.timer -= Time.deltaTime;
-			if (uis.timer <= 0)
-			{
+			if (uis.timer <= 0) {
 				FixCraftLock();
 				uis.vessel = null;
 			}
@@ -538,8 +505,7 @@ public class ExLaunchPad : PartModule
 	// Fired multiple times per frame in response to GUI events
 	private void OnGUI()
 	{
-		if (uis.showcraftbrowser)
-		{
+		if (uis.showcraftbrowser) {
 			uis.craftlist.OnGUI();
 		}
 	}
@@ -549,8 +515,7 @@ public class ExLaunchPad : PartModule
 	private void OnLoad()
 	{
 		bases = FlightGlobals.fetch.vessels;
-		foreach (Vessel v in bases)
-		{
+		foreach (Vessel v in bases) {
 			print(v.name);
 		}
 	}
@@ -589,8 +554,7 @@ public class ExLaunchPad : PartModule
 		// Only allow enabling the menu if we are in a suitable place
 		if (((this.vessel.situation == Vessel.Situations.LANDED) ||
 				(this.vessel.situation == Vessel.Situations.PRELAUNCH) ||
-				(this.vessel.situation == Vessel.Situations.SPLASHED)))
-		{
+				(this.vessel.situation == Vessel.Situations.SPLASHED))) {
 			RenderingManager.AddToPostDrawQueue(3, new Callback(drawGUI)); //start the GUI
 			uis.builduiactive = true;
 		}
@@ -618,12 +582,9 @@ public class ExLaunchPad : PartModule
 	[KSPAction("Toggle Build Menu")]
 	public void ToggleBuildMenuAction(KSPActionParam param)
 	{
-		if (uis.builduiactive)
-		{
+		if (uis.builduiactive) {
 			HideBuildMenu();
-		}
-		else
-		{
+		} else {
 			ShowBuildMenu();
 		}
 	}
@@ -694,8 +655,8 @@ public class ExLaunchPad : PartModule
 		}
 
 		// If there is JetFuel (ie LF only tanks as well as LFO tanks - eg a SpacePlane) then split the Surplus LF off as "JetFuel"
-		double jetFuel = 0.0;
 		if (resources.ContainsKey("Oxidizer") && resources.ContainsKey("LiquidFuel")) {
+			double jetFuel = 0.0;
 			// The LiquidFuel:Oxidizer ratio is 9:11. Try to minimize rounding effects.
 			jetFuel = (11 * resources["LiquidFuel"] - 9 * resources["Oxidizer"]) / 11;
 			if (jetFuel < 0.01)	{
@@ -703,9 +664,9 @@ public class ExLaunchPad : PartModule
 				// small will be due to precision losses.
 				jetFuel = 0.0;
 			}
+			resources["LiquidFuel"] -= jetFuel;
+			resources["JetFuel"] = jetFuel;
 		}
-		resources["JetFuel"] = jetFuel;
-		resources["LiquidFuel"] -= jetFuel;
 
 		return resources;
 	}
@@ -733,9 +694,6 @@ public class ExLaunchPad : PartModule
 		this.part.RequestResource("MonoPropellant", -availableMonoPropellant);
 		nship.parts[0].localRoot.explode();
 	}
-
-
-
 }
 
 public class Recycler : PartModule
@@ -745,16 +703,32 @@ public class Recycler : PartModule
 	{
 		float conversionEfficiency = 0.8f;
 		List<Vessel> tempList = new List<Vessel>(); //temp list to hold debris vessels
+		VesselResources recycler = new VesselResources(vessel);
+		PartResourceDefinition rpdef;
+		rpdef = PartResourceLibrary.Instance.GetDefinition("RocketParts");
+		double amount, remain;
 
-		foreach (Vessel v in FlightGlobals.Vessels)
-		{
+		foreach (Vessel v in FlightGlobals.Vessels) {
 			if (v.vesselType == VesselType.Debris) tempList.Add(v);
 		}
 		foreach (Vessel v in tempList) {
 			// If vessel is less than 50m away, delete and convert it to rocketparts at conversionEfficiency% efficiency
 			if (Vector3d.Distance(v.GetWorldPos3D(), this.vessel.GetWorldPos3D())<50) {
-				print(v.name);
-				this.part.RequestResource("RocketParts", -v.GetTotalMass()*conversionEfficiency);
+				VesselResources scrap = new VesselResources(v);
+				foreach (string resource in scrap.resources.Keys) {
+					remain = amount = scrap.ResourceAmount (resource);
+					// Pul out solid fuel, but lose it.
+					scrap.TransferResource(resource, -amount);
+					if (resource != "SolidFuel") {
+						// anything left over just evaporates
+						remain = recycler.TransferResource(resource, amount);
+					}
+					Debug.Log(String.Format("[EL] {0}-{1}: {2} taken {3} reclaimed, {4} lost", v.name, resource, amount, amount - remain, remain));
+				}
+				float mass = v.GetTotalMass();
+				amount = mass * conversionEfficiency / rpdef.density;
+				remain = recycler.TransferResource("RocketParts", amount);
+				Debug.Log(String.Format("[EL] {0}: hull rocket parts {1} taken {2} reclaimed {3} lost", v.name, amount, amount - remain, remain));
 				v.Die();
 			}
 		}
@@ -788,8 +762,7 @@ public class LaunchSite : MonoBehaviour
 		//gm.transform.position = vesselWorldTransformSpawningPoint.position;
 		//gm.transform.rotation= vesselWorldTransformSpawningPoint.rotation;
 
-		foreach (Vessel v in FlightGlobals.Vessels)
-		{
+		foreach (Vessel v in FlightGlobals.Vessels) {
 			if (v.name == "Dubig") {
 				gm.transform.position = v.GetTransform().position;
 				gm.transform.rotation = v.GetTransform().rotation;
